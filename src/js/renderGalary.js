@@ -29,4 +29,5 @@ export function renderImg(arr) {
     )
     .join();
   imgContainer.insertAdjacentHTML('beforeend', markupImg);
+//   console.log(arr);
 }
