@@ -25,6 +25,7 @@ const loadMoreBtn = new LoadMoreBtnApi({
 });
 
 formEl.addEventListener('submit', onSearch);
+loadMoreBtn.refs.button.addEventListener('click', fetchArrPixab);
 
 function onSearch(e) {
   e.preventDefault();
@@ -40,8 +41,8 @@ function onSearch(e) {
   fetchArrPixab();
 }
 
-export function renderImg(arr) {
-  const markupImg = arr
+export function renderImg(hits) {
+  const markupImg = hits
     .map(
       ({
         webformatURL,
@@ -76,8 +77,8 @@ export function renderImg(arr) {
 
 function fetchArrPixab() {
   loadMoreBtn.disable();
-  pixabayApiService.fetchImg().then(arr => {
-    renderImg(arr);
+  pixabayApiService.fetchImg().then(hist => {
+    renderImg(hist);
     loadMoreBtn.enable();
   });
 }

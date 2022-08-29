@@ -1,5 +1,5 @@
-export function renderImg(arr) {
-  const markupImg = arr
+export function renderImg(hits) {
+  const markupImg = hits
     .map(
       ({
         webformatURL,
@@ -28,6 +28,6 @@ export function renderImg(arr) {
 </div>`
     )
     .join();
-  imgContainer.insertAdjacentHTML('beforeend', markupImg);
+  imgGallery.insertAdjacentHTML('beforeend', markupImg);
 //   console.log(arr);
 }

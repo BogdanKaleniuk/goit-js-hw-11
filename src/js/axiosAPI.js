@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const url = 'https://pixabay.com/api/';
-const key = '29544184-f05b1a44cab73eff12533d9b3';
+const key = 'key=29544184-f05b1a44cab73eff12533d9b3';
 const filter =
   'image_type=photo&orientation=horizontal&safesearch=true&per_page=40';
 
@@ -13,13 +13,13 @@ const filter =
 
     fetchImg() {
     return fetch(
-      `key=${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
+      `${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
     )
       .then(response => response.json())
-      .then(({ arr }) => {
+      .then(({ hits }) => {
         this.incrementPage();
 
-        return arr;
+        return hits;
       });
   }
 
@@ -40,3 +40,4 @@ const filter =
     this.query = newQuery;
   }
 }
+
