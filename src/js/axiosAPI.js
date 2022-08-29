@@ -13,7 +13,7 @@ const filter =
 
     fetchImg() {
     return fetch(
-      `${BASE_URL}?${key}&q=${this.query}&${filter}&page=${this.page}`
+      `key=${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
     )
       .then(response => response.json())
       .then(({ arr }) => {

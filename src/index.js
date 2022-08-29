@@ -70,7 +70,7 @@ export function renderImg(arr) {
 </div>`
     )
     .join();
-  imgContainer.insertAdjacentHTML('beforeend', markupImg);
+  imgGallery.insertAdjacentHTML('beforeend', markupImg);
 //   console.log(arr);
 }
 
@@ -98,6 +98,6 @@ function onEmptyError(error) {
   Notiflix.Notify.warning('Поле пусте, введіть щось');
 };
 function clearImgGallery() {
-  imgContainer.innerHTML = '';
+  imgGallery.innerHTML = '';
 };
 
