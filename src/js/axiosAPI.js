@@ -32,13 +32,13 @@ const filter =
   //     });
   // }
   
-  // get searchQuery() {
-  //   return this.query;
-  // }
+  get searchQuery() {
+    return this.query;
+  }
 
-  // set searchQuery(newQuery) {
-  //   this.query = newQuery;
-  // }
+  set searchQuery(newQuery) {
+    this.query = newQuery;
+  }
 
    incrementPage() {
     this.page += 1;

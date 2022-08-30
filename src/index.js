@@ -89,7 +89,9 @@ function renderImg({hits}) {
     </p>
   </div>
 </div>`
+
     )
+    
     .join();
   imgGallery.insertAdjacentHTML('beforeend', markupImg);
 //   console.log(arr);
