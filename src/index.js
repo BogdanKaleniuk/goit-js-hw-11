@@ -45,6 +45,9 @@ function onSearch(e) {
   clearImgGallery();
   fetchArrPixab();
 }
+function clearImgGallery() {
+  imgGallery.innerHTML = '';
+}
 
 export function renderImg({hits}) {
   const markupImg = hits
@@ -90,13 +93,9 @@ export function renderImg({hits}) {
 
 function fetchArrPixab() {
   loadMoreBtn.disable();
-  pixabayApiService
-    .fetchImg()
-    .then(({ data }) => {
+  pixabayApiService.fetchImg().then(({ data }) => {
       if (data.total === 0) {
-        Notiflix.Notify.info(
-          'text.'
-        );
+        Notiflix.Notify.info('text.');
         loadMoreBtn.hide();
         return;
       }
@@ -109,6 +108,13 @@ function fetchArrPixab() {
     .catch(onFetchError);
 }
 
+function onFetchError(error) {
+  Notiflix.Notify.warning('text...');
+}
+
+function onEmptyError(error) {
+  Notiflix.Notify.warning('Поле пусте, введіть щось');
+}
 
 // if (markupImg > 40) {
 //     loadMoreBtn.classList.remove('is-hidden');
@@ -121,18 +127,3 @@ function fetchArrPixab() {
 
 
 
-
-
-
-
-
-
-function onEmptyError(error) {
-  Notiflix.Notify.warning('Поле пусте, введіть щось');
-};
-function clearImgGallery() {
-  imgGallery.innerHTML = '';
-}
-function onFetchError(error) {
-  Notiflix.Notify.warning('text.');
-}

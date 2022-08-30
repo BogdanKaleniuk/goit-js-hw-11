@@ -87,6 +87,8 @@
   width: 80%;
   padding: 8px;
   margin-bottom: 24px;
+  margin-left: auto;
+  margin-right: auto;
 
   background-color: green;
 }
@@ -99,6 +101,8 @@
 
 .load-more.is-hidden {
   display: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 input {
@@ -138,4 +142,24 @@ input {
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+.one {
+  color: blue;
+}
+
+.two {
+  color: red;
+}
+.three {
+  color: #FBBC05;
+}
+.four {
+   color: blue;
+}
+.five { 
+  color: green;
+}
+.six { 
+  color: red;
 }
