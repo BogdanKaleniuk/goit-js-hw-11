@@ -88,7 +88,7 @@ export function renderImg({hits}) {
 //   });
 // }
 
-function fetchHitsPixab() {
+function fetchArrPixab() {
   loadMoreBtn.disable();
   pixabayApiService
     .fetchImg()
@@ -132,5 +132,7 @@ function onEmptyError(error) {
 };
 function clearImgGallery() {
   imgGallery.innerHTML = '';
-};
-
+}
+function onFetchError(error) {
+  Notiflix.Notify.warning('text.');
+}
