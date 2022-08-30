@@ -11,17 +11,34 @@ const filter =
     this.page = 1;
   }
 
-    fetchImg() {
-    return fetch(
+  async fetchImg() {
+    const response = await axios.get(
       `${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
-    )
-      .then(response => response.json())
-      .then(({ hits }) => {
-        this.incrementPage();
+    );
 
-        return hits;
-      });
+    this.incrementPage();
+    return response;
   }
+
+  //   fetchImg() {
+  //   return fetch(
+  //     `${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
+  //   )
+  //     .then(response => response.json())
+  //     .then(({ hits }) => {
+  //       this.incrementPage();
+
+  //       return hits;
+  //     });
+  // }
+  
+  // get searchQuery() {
+  //   return this.query;
+  // }
+
+  // set searchQuery(newQuery) {
+  //   this.query = newQuery;
+  // }
 
    incrementPage() {
     this.page += 1;
@@ -32,12 +49,6 @@ const filter =
   }
 
   
-  get searchQuery() {
-    return this.query;
-  }
 
-  set searchQuery(newQuery) {
-    this.query = newQuery;
-  }
 }
 

@@ -1,12 +1,11 @@
 export default class LoadMoreBtnApi {
-     constructor({ selector, hidden = false }) {
+  constructor({ selector, hidden = false }) {
     this.refs = this.getRefs(selector);
 
     // if (hidden) {hide}
     hidden && this.hide();
   }
 
-  
   getRefs(selector) {
     const refs = {};
     refs.button = document.querySelector(selector);
@@ -16,13 +15,13 @@ export default class LoadMoreBtnApi {
     return refs;
   }
 
-   enable() {
+  enable() {
     this.refs.button.disabled = false;
     // this.refs.label.textContent = 'Показать ещё';
     // this.refs.spinner.classList.add('is-hidden');
   }
 
-   disable() {
+  disable() {
     this.refs.button.disabled = true;
     // this.refs.label.textContent = 'Загружаем...';
     // this.refs.spinner.classList.remove('is-hidden');

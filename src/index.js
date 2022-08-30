@@ -1,12 +1,16 @@
-import Notiflix from 'notiflix';
+
 // // Описаний в документації
-import SimpleLightbox from "simplelightbox";
+
 // // Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
+
 import scroll from './js/scroll';
+
+
+
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import Notiflix from 'notiflix';
 import LoadMoreBtnApi from './js/loadMore';
-import renderGalary from './js/renderGalary';
-// import axiosAPI from './js/axiosAPI';
 import PixabayApiService from './js/axiosAPI';
 
 
@@ -23,6 +27,7 @@ const loadMoreBtn = new LoadMoreBtnApi({
   selector: '.load-more',
   hidden: true,
 });
+
 
 formEl.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', fetchArrPixab);
@@ -41,7 +46,7 @@ function onSearch(e) {
   fetchArrPixab();
 }
 
-export function renderImg(hits) {
+export function renderImg({hits}) {
   const markupImg = hits
     .map(
       ({
@@ -75,14 +80,41 @@ export function renderImg(hits) {
 //   console.log(arr);
 }
 
-function fetchArrPixab() {
+// function fetchArrPixab() {
+//   loadMoreBtn.disable();
+//   pixabayApiService.fetchImg().then(hits => {
+//     renderImg(hits);
+//     loadMoreBtn.enable();
+//   });
+// }
+
+function fetchHitsPixab() {
   loadMoreBtn.disable();
-  pixabayApiService.fetchImg().then(hist => {
-    renderImg(hist);
-    loadMoreBtn.enable();
-  });
+  pixabayApiService
+    .fetchImg()
+    .then(({ data }) => {
+      if (data.total === 0) {
+        Notiflix.Notify.info(
+          'text.'
+        );
+        loadMoreBtn.hide();
+        return;
+      }
+
+      renderImg(data);
+      // lightbox.refresh();
+
+      loadMoreBtn.enable();
+    })
+    .catch(onFetchError);
 }
 
+
+// if (markupImg > 40) {
+//     loadMoreBtn.classList.remove('is-hidden');
+//   } else {
+//     loadMoreBtn.classList.add('is-hidden');
+//   }
 
 
 
