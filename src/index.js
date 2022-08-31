@@ -22,7 +22,7 @@ const imgGallery = document.querySelector('.gallery');
 
 
 
-const pixabayApiService = new PixabayApiService();
+const pixabayApi = new PixabayApiService();
 const loadMoreBtn = new LoadMoreBtnApi({
   selector: '.load-more',
   hidden: true,
@@ -35,13 +35,13 @@ loadMoreBtn.refs.button.addEventListener('click', fetchArrPixab);
 function onSearch(e) {
   e.preventDefault();
 
-  pixabayApiService.searchQuery =
+  pixabayApi.searchQuery =
     e.currentTarget.elements.searchQuery.value.trim();
-  if (pixabayApiService.searchQuery === '') {
+  if (pixabayApi.searchQuery === '') {
     return onEmptyError();
   }
   loadMoreBtn.show();
-  pixabayApiService.resetPage();
+  pixabayApi.resetPage();
   clearImgGallery();
   fetchArrPixab();
 }
@@ -99,7 +99,7 @@ function renderImg({hits}) {
 
 // function fetchArrPixab() {
 //   loadMoreBtn.disable();
-//   pixabayApiService.fetchImg().then(hits => {
+//   pixabayApi.fetchImg().then(hits => {
 //     renderImg(hits);
 //     loadMoreBtn.enable();
 //   });
@@ -107,7 +107,7 @@ function renderImg({hits}) {
 
 function fetchArrPixab() {
   loadMoreBtn.disable();
-  pixabayApiService.fetchImg().then(({ data }) => {
+  pixabayApi.fetchImg().then(({ data }) => {
       if (data.total === 0) {
         Notiflix.Notify.info('text2');
         loadMoreBtn.hide();
