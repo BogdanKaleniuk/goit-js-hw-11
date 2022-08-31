@@ -12,7 +12,7 @@ const filter =
   }
 
   async fetchImg() {
-    console.log(this);
+    // console.log(this);
     const response = await axios.get(
       `${url}?${key}&q=${this.query}&${filter}&page=${this.page}`
     );
