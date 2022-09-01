@@ -30,7 +30,7 @@ const loadMoreBtn = new LoadMoreBtnApi({
 
 
 formEl.addEventListener('submit', onSearch);
-loadMoreBtn.refs.button.addEventListener('click', fetchArrPixab);
+loadMoreBtn.refs.button.addEventListener('click', fetchPixab);
 
 function onSearch(e) {
   e.preventDefault();
@@ -40,10 +40,24 @@ function onSearch(e) {
     return onEmptyError();
   }
   if (pixabayApi.searchQuery === 'russia') {
-    // return rusError();
-    return Notiflix.Notify.warning('russia boloto');
     
+    // return rusError();
+    Notiflix.Notify.warning('russia boloto');
+    rusError();
   }
+
+pixabayApi.fetchImg().then(({ data }) => {
+      if (data.total === 0) {
+        Notiflix.Notify.info(
+          `Sorry, there are no images matching your ${pixabayApi.searchQuery}. Please try again.`
+        );
+        loadMoreBtn.hide();
+      } else if (data.total !== 0) {
+        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+      }
+    });
+
+
 // console.log(pixabayApi.searchQuery);
 
 
@@ -55,7 +69,7 @@ function onSearch(e) {
   loadMoreBtn.show();
   pixabayApi.resetPage();
   clearImgGallery();
-  fetchArrPixab();
+  fetchPixab();
 }
 
 function clearImgGallery() {
@@ -109,6 +123,13 @@ function renderImg({hits}) {
 //   console.log(arr);
 }
 
+function rusError() {
+  
+}
+
+
+
+
 // function rusError() {
 // const markupImg2 = hits
 //     .map(
@@ -154,7 +175,7 @@ function renderImg({hits}) {
 //   });
 // }
 
-function fetchArrPixab() {
+function fetchPixab() {
   loadMoreBtn.disable();
   pixabayApi.fetchImg().then(({ data }) => {
       if (data.total === 0) {
