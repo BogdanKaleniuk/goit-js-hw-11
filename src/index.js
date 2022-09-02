@@ -28,6 +28,7 @@ const loadMoreBtn = new LoadMoreBtnApi({
   hidden: true,
 });
 
+const lightbox = new SimpleLightbox('.gallery a');
 
 formEl.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', fetchPixab);
@@ -176,21 +177,39 @@ function rusError() {
 // }
 
 function fetchPixab() {
+  try { 
   loadMoreBtn.disable();
   pixabayApi.fetchImg().then(({ data }) => {
-      if (data.total === 0) {
-        Notiflix.Notify.info('text2');
+    renderImg(data);
+       const totalPages = Math.ceil(data.totalHits / pixabayApi.perPage);
+      if (pixabayApi.page - 1 === totalPages + 1) {
+       
+        
         loadMoreBtn.hide();
         return;
+        
       }
+      if (data.totalHits <= 40) {
+         Notiflix.Notify.info(`Знайдена лише одна сторінка`);
+        loadMoreBtn.disable();
+        lightbox.refresh();
+        console.log(data.totalHits);
+      } else {
 
-      renderImg(data);
+      
+      // console.log(totalPages);
+      scroll();
+      // console.log(scroll());
+      
       // lightbox.refresh();
 
       loadMoreBtn.enable();
+      lightbox.refresh();}
+      // console.log(lightbox.refresh());
     })
     .catch(onFetchError);
-}
+}}
+
 
 // function rusError() {
 // const markupImg2 = hits
